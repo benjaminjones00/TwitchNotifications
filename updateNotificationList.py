@@ -22,20 +22,20 @@ def write_file(list):#Function to write to streamer_list.csv
 		thewriter = csv.writer(w)
 		thewriter.writerow(list)
 		
-def add_streamer():#Function to easily add streamers within the command line
-	append_streamer = []
-	while True:
-		add_streamer = input('Enter the username of the streamer you want to get notified to: ')
-		if add_streamer != 'exit':
-			append_streamer.append(add_streamer)
-			print(append_streamer)
-		else:
-			new_list.extend(append_streamer)
-			write_file(new_list)
-			print(new_list)
-			break
-		print('Type \'exit\' to stop adding')
-	main()
+def add_streamer():
+        append_streamer = []
+        while True:
+                add_streamer = input('Enter the username of the streamer you want to get notified to: ')
+                if add_streamer != 'exit':
+                        append_streamer.append(add_streamer)
+                        print(append_streamer)
+                        print('Type \'exit\' to stop adding')
+                else:
+                        new_list.extend(append_streamer)
+                        write_file(new_list)
+                        print(new_list)
+                        break
+        main()
 
 def remove_streamers():#Function to easily remove streamers within the command line
 	print('Your current list:')
@@ -57,7 +57,6 @@ def main():#The main script which you can easily edit the current streamer list
 	print('\n\n')
 	print('1: Add to list\n2: Remove from list\n\nPress any other key to exit program')
 	user_input = input()
-	
 	if user_input == '1':
 		add_streamer()
 	elif user_input == '2':
