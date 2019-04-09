@@ -2,7 +2,8 @@ import csv
 import sys
 
 new_list = []
-with open('streamer_list.csv', 'r') as f: #Reads the current streamer_list.csv file and saves it to a list
+#Reads the current streamer_list.csv file and saves it to a list
+with open('streamer_list.csv', 'r') as f:
   reader = csv.reader(f)
   your_list = list(reader)
 try:
@@ -10,18 +11,19 @@ try:
 except:
 	pass
 
-
-def read_file():#Function to read a csv file
+#Function to read a csv file
+def read_file():
 	with open('streamer_list.csv', 'r') as r:
 		reader = csv.reader(r)
 		for row in reader:
 			return(row)
-	
-def write_file(list):#Function to write to streamer_list.csv
+#Function to write to streamer_list.csv	
+def write_file(list):
 	with open('streamer_list.csv', 'w', newline='') as w:
 		thewriter = csv.writer(w)
 		thewriter.writerow(list)
-		
+
+#Adds streamers to new_list
 def add_streamer():
         append_streamer = []
         while True:
@@ -37,7 +39,8 @@ def add_streamer():
                         break
         main()
 
-def remove_streamers():#Function to easily remove streamers within the command line
+#Removes streamers from new_list
+def remove_streamers():
 	print('Your current list:')
 	print(new_list)
 	while True:
@@ -50,8 +53,8 @@ def remove_streamers():#Function to easily remove streamers within the command l
 		print(new_list)
 		print('Type \'exit\' to stop removing')
 	main()
-
-def main():#The main script which you can easily edit the current streamer list
+#Menu
+def main():
 	print('Current streamers which will trigger a notification: ')
 	print(read_file())
 	print('\n\n')

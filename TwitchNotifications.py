@@ -3,7 +3,9 @@ import requests
 import json
 import csv
 from win10toast import ToastNotifier
+''' imports '''
 
+#Reads client_id csv file
 def get_client_id():
     with open('client_id.csv', 'r') as client_id_file:
         reader = csv.reader(client_id_file)
@@ -11,6 +13,7 @@ def get_client_id():
         user_client_id = client_id[3][0][13:-1]
         return(user_client_id)
 
+#Checks if streamer is live
 def live_check(streamer_name, client_id):
     twitch_api_stream_url = "https://api.twitch.tv/kraken/streams/" \
                             + streamer_name + "?client_id=" + client_id
@@ -21,6 +24,7 @@ def live_check(streamer_name, client_id):
     else:
         return(True)
 
+#Displays a notification to Windows
 def toast_notification(streamer_name):
     toaster = ToastNotifier()
     toaster.show_toast("Twitch Notification", streamer_name + " is now live!", icon_path="twitch.ico", threaded=True)
@@ -31,13 +35,14 @@ client_id = get_client_id()
 notify = []
 online = []
 
+#Reads the streamerlist csv file and saves all streamers into a Offline list
 with open('streamer_list.csv', 'r') as streamer_list_file:
     reader = csv.reader(streamer_list_file)
     reader_list = list(reader)
     streamer_list = reader_list[0] [0:]
 offline = streamer_list[0:]
 
-
+#While loop to check whether to Notify the user
 while True:
     for x in offline:
         if live_check(x, client_id) is True:
